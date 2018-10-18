@@ -22,7 +22,7 @@ class Products(Resource):
         if 'quantity' not in data:
             return {"msg": "please input quantity"}, 406
         if 'category' not in data:
-            return {"msg": "please input category"} 
+            return {"msg": "please input category"}, 406 
 
         product = ProductModel(
             data['name'],
