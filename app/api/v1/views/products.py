@@ -19,6 +19,10 @@ class Products(Resource):
             return {"msg": "please input name"}, 406
         if 'price' not in data:
             return {"msg": "please input price"}, 406
+        if 'quantity' not in data:
+            return {"msg": "please input quantity"}, 406
+        if 'category' not in data:
+            return {"msg": "please input category"} 
 
         product = ProductModel(
             data['name'],

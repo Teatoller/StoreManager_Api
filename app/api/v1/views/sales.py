@@ -18,7 +18,9 @@ class Sales(Resource):
         if 'name' not in data:
             return {"msg": "please input name"}, 406
         if 'price' not in data:
-            return {"msg": "please input price"}, 406
+            return {"msg": "please input price :"}, 406
+        if 'quantity' not in data:
+            return{"msg": "Stock is Nil"}
 
         sale = SaleModel(
             data['name'],
