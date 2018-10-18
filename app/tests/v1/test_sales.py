@@ -38,7 +38,7 @@ class TestSale(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_get_single_sale(self):
-        """ """
+        """ Test Method to a for single sale  """
         self.app.post(p_url,
                       data=self.sale_data,
                       content_type='application/json')
