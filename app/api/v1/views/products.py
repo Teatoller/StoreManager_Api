@@ -1,32 +1,34 @@
 from flask_restful import Resource
 from flask import request
-
-PRODUCTS = []
+from app.api.v1.models.product import ProductModel, ListDatabase
 
 
 class Product(Resource):
-    """ """
+    def get(self, id):
+        product = ListDatabase.get_product_id(id)
+        if product:
+            return {"status": "success", "product": product.resultant()}, 200
+        return {"status": "Failed!", "msg": "product not found"}, 404
 
-    def get(self, prod_id):
-        """ GET """
-        for product in PRODUCTS:
-            if product["product_id"] == prod_id:
-                return product, 200
 
-        return {"product": None}, 404
-
+class Products(Resource):
     def post(self):
         """ POST """
-        data = request.get.json()
-        product = {"product_id": len(PRODUCTS) + 1,
-                   "Product_name": data["name"],
-                   "product_price": data['price']}
+        data = request.get_json(force=True)
+        if 'name' not in data:
+            return {"msg": "please input name"}, 406
+        if 'price' not in data:
+            return {"msg": "please input price"}, 406
 
-        PRODUCTS.append(product)
-        return(product), 201
+        product = ProductModel(
+            data['name'],
+            data['price'],
+            data['quantity'],
+            data['category'])
+        ListDatabase.PRODUCTS.append(product)
+        res = product.resultant()
+        return {"status": "success!", "product": res}, 201
 
-
-class ProductList(Resource):
     def get(self):
-        """ """
-        return{"products": PRODUCTS}, 200
+        ps = [i.resultant() for i in ListDatabase.PRODUCTS]
+        return {"status": "succes!", "products": ps}, 200

@@ -1,32 +1,34 @@
 from flask_restful import Resource
 from flask import request
-
-SALES = []
+from app.api.v1.models.sales import SaleModel, ListDatabase
 
 
 class Sale(Resource):
-    """ """
+    def get(self, id):
+        sale = ListDatabase.get_sale_id(id)
+        if sale:
+            return {"status": "success", "sale": sale.resultant()}, 200
+        return {"status": "Failed!", "msg": "sale not found"}, 404
 
-    def get(self, sale_id):
-        """ GET """
-        for sale in SALES:
-            if sale["sale_id"] == sale_id:
-                return sale, 200
 
-        return{"sale": None}, 404
-
-    def sale(self):
+class Sales(Resource):
+    def post(self):
         """ POST """
-        data = request.get.json()
-        sale = {"sale_id": len(SALES) + 1,
-                "Sale_name": data["name"],
-                "sale_price": data['price']}
+        data = request.get_json(force=True)
+        if 'name' not in data:
+            return {"msg": "please input name"}, 406
+        if 'price' not in data:
+            return {"msg": "please input price"}, 406
 
-        SALES.append(sale)
-        return(sale), 201
+        sale = SaleModel(
+            data['name'],
+            data['price'],
+            data['quantity'],
+            data['category'])
+        ListDatabase.SALES.append(sale)
+        response = sale.resultant()
+        return {"status": "success!", "sale": response}, 201
 
-
-class SaleList(Resource):
     def get(self):
-        """ """
-        return{"sales": SALES}, 200
+        sale = [i.resultant() for i in ListDatabase.SALES]
+        return {"status": "success!", "sales": sale}, 200
