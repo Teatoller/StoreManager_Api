@@ -5,6 +5,7 @@ from app.api.v1.models.product import ProductModel, ListDatabase
 
 class Product(Resource):
     def get(self, id):
+        """ Gets Single product """
         product = ListDatabase.get_product_id(id)
         if product:
             return {"status": "success", "product": product.resultant()}, 200
@@ -13,7 +14,7 @@ class Product(Resource):
 
 class Products(Resource):
     def post(self):
-        """ POST """
+        """ Add and validates product that are added """
         data = request.get_json(force=True)
         if 'name' not in data:
             return {"msg": "please input name"}, 406
@@ -22,7 +23,7 @@ class Products(Resource):
         if 'quantity' not in data:
             return {"msg": "please input quantity"}, 406
         if 'category' not in data:
-            return {"msg": "please input category"}, 406 
+            return {"msg": "please input category"}, 406
 
         product = ProductModel(
             data['name'],
@@ -34,5 +35,6 @@ class Products(Resource):
         return {"status": "success!", "product": res}, 201
 
     def get(self):
-        ps = [i.resultant() for i in ListDatabase.PRODUCTS]
-        return {"status": "succes!", "products": ps}, 200
+        """ Iterates PRODUCTS LIST and return all products """
+        allProducts = [i.resultant() for i in ListDatabase.PRODUCTS]
+        return {"status": "succes!", "products": allProducts}, 200

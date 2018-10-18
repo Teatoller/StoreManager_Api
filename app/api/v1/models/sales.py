@@ -1,8 +1,9 @@
 class SaleModel():
-    """ """
+    """ Constructor Model for Sales """
     sale_id = 1
 
     def __init__(self, name, price, quantity, category):
+        """ Declare variables used in sales """
         self.sale_id = SaleModel.sale_id
         self.name = name
         self.price = price
@@ -11,7 +12,7 @@ class SaleModel():
         SaleModel.sale_id += 1
 
     def resultant(self):
-        """ """
+        """ Outline structure of sales format """
         return dict(
             sale_name=self.name,
             sale_price=self.price,
@@ -21,17 +22,20 @@ class SaleModel():
 
 
 class ListDatabase():
+    """ Databases and methods"""
     PRODUCTS = []
     SALES = []
 
     @classmethod
     def get_sale_id(cls, sale_id):
+        """ Iterates and loops SALES list and sale_id """
         for sale in cls.SALES:
             if sale.sale_id == sale_id:
                 return sale
 
     @classmethod
     def get_sale_by_name(cls, name):
+        """ Iterates and loops  """
         for sale in cls.SALES:
             if sale.name == name:
                 return sale

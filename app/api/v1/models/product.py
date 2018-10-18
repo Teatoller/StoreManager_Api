@@ -1,8 +1,9 @@
 class ProductModel():
-    """ """
+    """ Constructor model for our PRODUCTS """
     product_id = 1
 
     def __init__(self, name, price, quantity, category):
+        """ Declaring variable to be used within the class  """
         self.product_id = ProductModel.product_id
         self.name = name
         self.price = price
@@ -11,7 +12,7 @@ class ProductModel():
         ProductModel.product_id += 1
 
     def resultant(self):
-        """ """
+        """ Outlines format by which product(s) are returned"""
         return dict(
             product_name=self.name,
             product_price=self.price,
@@ -21,17 +22,20 @@ class ProductModel():
 
 
 class ListDatabase():
+    """ Database Model for methods """
     PRODUCTS = []
     SALES = []
 
     @classmethod
     def get_product_id(cls, product_id):
-        for p in cls.PRODUCTS:
-            if p.product_id == product_id:
-                return p
+        """ Iterates and loops PRODUCTS return the product """
+        for product in cls.PRODUCTS:
+            if product.product_id == product_id:
+                return product
 
     @classmethod
     def get_product_by_name(cls, name):
-        for p in cls.PRODUCTS:
-            if p.name == name:
-                return p
+        """ Iterates and loops and returns all products in PRODUCT list """
+        for product in cls.PRODUCTS:
+            if product.name == name:
+                return product
