@@ -25,6 +25,7 @@ class ListDatabase():
     """ Databases and methods"""
     PRODUCTS = []
     SALES = []
+    USERS = []
 
     @classmethod
     def get_sale_id(cls, sale_id):

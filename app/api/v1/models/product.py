@@ -23,8 +23,18 @@ class ProductModel():
 
 class ListDatabase():
     """ Database Model for methods """
+   
     PRODUCTS = []
     SALES = []
+    USERS = []
+
+   
+    @classmethod
+    def get_product_by_name(cls, name):
+        """ Iterates and loops and returns all products in PRODUCT list """
+        for product in cls.PRODUCTS:
+            if product.name == name:
+                return product
 
     @classmethod
     def get_product_id(cls, product_id):
@@ -33,9 +43,3 @@ class ListDatabase():
             if product.product_id == product_id:
                 return product
 
-    @classmethod
-    def get_product_by_name(cls, name):
-        """ Iterates and loops and returns all products in PRODUCT list """
-        for product in cls.PRODUCTS:
-            if product.name == name:
-                return product
