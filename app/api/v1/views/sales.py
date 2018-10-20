@@ -8,8 +8,8 @@ class Sale(Resource):
         """ Method to return a single sale from SALES list """
         sale = ListDatabase.get_sale_id(id)
         if sale:
-            return {"status": "success", "sale": sale.resultant()}, 200
-        return {"status": "Failed!", "msg": "sale not found"}, 404
+            return {"status": "successful", "sale": sale.resultant()}, 200
+        return {"status": "unsuccesful!", "msg": "sale not found"}, 404
 
 
 class Sales(Resource):
@@ -33,10 +33,10 @@ class Sales(Resource):
             data['category'])
         ListDatabase.SALES.append(sale)
         response = sale.resultant()
-        return {"status": "success!", "sale": response}, 201
+        return {"status": "The sale was made successfully!", "sale": response}, 201
 
     def get(self):
         """ Iterates and loop SALES list and returns all items in
          SALES  database"""
         sale = [i.resultant() for i in ListDatabase.SALES]
-        return {"status": "success!", "sales": sale}, 200
+        return {"status": "Retrieval of sale records successful!", "sales": sale}, 200

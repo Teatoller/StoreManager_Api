@@ -5,7 +5,7 @@ from flask_restful import Api
 # Local imports
 from app.api.v1.views.products import Product, Products
 from app.api.v1.views.sales import Sale, Sales
-# from app.api.v1.views.users import Sale, Sales
+
 
 
 version_1 = Blueprint('api', __name__, url_prefix="/api/v1")

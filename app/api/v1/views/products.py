@@ -8,8 +8,8 @@ class Product(Resource):
         """ Gets Single product """
         product = ListDatabase.get_product_id(id)
         if product:
-            return {"status": "success", "product": product.resultant()}, 200
-        return {"status": "Failed!", "msg": "product not found"}, 404
+            return {"status": "successful", "product": product.resultant()}, 200
+        return {"status": "unsuccesful!", "msg": "product not found"}, 404
 
 
 class Products(Resource):
@@ -31,10 +31,10 @@ class Products(Resource):
             data['quantity'],
             data['category'])
         ListDatabase.PRODUCTS.append(product)
-        res = product.resultant()
-        return {"status": "success!", "product": res}, 201
+        response = product.resultant()
+        return {"status": "Validity of post format!", "product": response}, 201
 
     def get(self):
         """ Iterates PRODUCTS LIST and return all products """
         allProducts = [i.resultant() for i in ListDatabase.PRODUCTS]
-        return {"status": "succes!", "products": allProducts}, 200
+        return {"status": "vailable inventory!", "products": allProducts}, 200
