@@ -31,5 +31,5 @@ class Login(Resource):
         
 class Allusers(Resource):
     def get(self):
-        user = [usr.resultant() for usr in ListDatabase.USERS]
+        user = [user.resultant() for user in ListDatabase.USERS]
         return{'msg': 'Retrival of all users successul', "users":user}, 201
