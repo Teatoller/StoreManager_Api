@@ -1,0 +1,34 @@
+from flask_restful import Resource
+from flask import request
+from app.api.v1.models.users import UserModel, ListDatabase
+
+class Registration(Resource):
+    def post(self):
+        data = request.get_json(force=True)
+        
+        user = UserModel(
+            data['username'],
+            data['email'],
+            data['password']
+            )
+        ListDatabase.USERS.append(user)
+        response = user.resultant()
+        return {'status':'Registration Successful', "user": response}, 201
+
+class Login(Resource):
+    def post(self):
+        data = request.get_json(force=True)
+        
+        current_user = UserModel(
+            data['username'],
+            data['email'],
+            data['password']
+            )
+        ListDatabase.USERS.append(current_user)
+        response = current_user.resultant()
+        return {'msg':'user login ', "current_user": response}, 201
+
+        
+class Allusers(Resource):
+    def get(self):
+        return{'msg': 'Retrival of all users success'}
