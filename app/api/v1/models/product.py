@@ -42,4 +42,3 @@ class ListDatabase():
         for product in cls.PRODUCTS:
             if product.product_id == product_id:
                 return product
-

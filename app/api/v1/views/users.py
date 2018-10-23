@@ -26,9 +26,10 @@ class Login(Resource):
             )
         ListDatabase.USERS.append(current_user)
         response = current_user.resultant()
-        return {'msg':'user login ', "current_user": response}, 201
+        return {'msg':'user login succesful', "current_user": response}, 201
 
         
 class Allusers(Resource):
     def get(self):
-        return{'msg': 'Retrival of all users success'}
+        user = [usr.resultant() for usr in ListDatabase.USERS]
+        return{'msg': 'Retrival of all users successul', "users":user}, 201

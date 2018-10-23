@@ -38,5 +38,5 @@ class Sales(Resource):
     def get(self):
         """ Iterates and loop SALES list and returns all items in
          SALES  database"""
-        sale = [i.resultant() for i in ListDatabase.SALES]
+        sale = [sal.resultant() for sal in ListDatabase.SALES]
         return {"status": "Retrieval of sale records successful!", "sales": sale}, 200
