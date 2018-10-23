@@ -5,10 +5,13 @@ python:
 
 install:
  - pip install coveralls
+ - pip install -r requirements.txt
 
 script:
- - pytest --cov=app -v -W error:UserWarning
+ - pytest --cov-report term-missing --cov=app
  - coveralls
+env:
+ - FLASK_VERSION=1.0.2
 
 after_success:
  - coveralls
