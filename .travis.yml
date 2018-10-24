@@ -1,0 +1,17 @@
+language: python
+
+python:
+ - "3.6"
+
+install:
+ - pip install coveralls
+ - pip install -r requirements.txt
+
+script:
+ - pytest --cov-report term-missing --cov=app
+ - coveralls
+env:
+ - FLASK_VERSION=1.0.2
+
+after_success:
+ - coveralls
